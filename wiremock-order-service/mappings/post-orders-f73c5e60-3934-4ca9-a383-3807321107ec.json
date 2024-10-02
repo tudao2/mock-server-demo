@@ -1,0 +1,15 @@
+{
+  "id" : "f73c5e60-3934-4ca9-a383-3807321107ec",
+  "request" : {
+    "url" : "/orders",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 200,
+    "proxyBaseUrl" : "http://host.docker.internal:9001"
+  },
+  "uuid" : "f73c5e60-3934-4ca9-a383-3807321107ec",
+  "persistent" : true,
+  "priority" : 100,
+  "insertionIndex" : 29
+}

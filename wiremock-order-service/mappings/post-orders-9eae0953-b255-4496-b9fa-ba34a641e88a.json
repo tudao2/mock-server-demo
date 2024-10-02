@@ -1,0 +1,39 @@
+{
+  "id" : "9eae0953-b255-4496-b9fa-ba34a641e88a",
+  "request" : {
+    "url" : "/orders",
+    "method" : "POST",
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : {
+        "expression" : "$.productId",
+        "equalTo" : "123"
+      }
+    } ]
+  },
+  "response" : {
+    "status" : 200,
+    "jsonBody" : {
+      "orderId" : "111222",
+      "productId" : "{{jsonPath request.body '$.productId'}}",
+      "quantity" : "{{jsonPath request.body '$.quantity'}}"
+    },
+    "headers" : {
+      "Content-Type" : "application/json"
+    },
+    "transformers" : [ "response-template" ]
+  },
+  "uuid" : "9eae0953-b255-4496-b9fa-ba34a641e88a",
+  "persistent" : true,
+  "insertionIndex" : 28,
+  "serveEventListeners" : [ {
+    "name" : "webhook",
+    "parameters" : {
+      "method" : "POST",
+      "url" : "http://host.docker.internal:9000/notification",
+      "headers" : {
+        "Content-Type" : "application/json"
+      },
+      "body" : "{ \"userId\": \"{{jsonPath originalRequest.body '$.userId'}}\", \"orderId\": \"123\" }"
+    }
+  } ]
+}

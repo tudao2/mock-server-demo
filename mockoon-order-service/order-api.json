@@ -1,0 +1,125 @@
+{
+  "uuid": "331fe3e6-b148-4f3c-a483-51ff121ae648",
+  "lastMigration": 32,
+  "name": "Order api",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 9081,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "b3a9244b-b236-493b-82ea-1365f5bc38fa",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "orders",
+      "responses": [
+        {
+          "uuid": "76ddf652-33c8-4cae-b924-f0256131f596",
+          "body": "{\n  \"orderId\": \"111222\",\n  \"productId\": {{body 'productId'}},\n  \"quantity\": {{body 'quantity'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "productId",
+              "value": "123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": [
+            {
+              "uuid": "1e769920-3df0-4c83-bc0d-713a5b754427",
+              "latency": 0
+            }
+          ]
+        }
+      ],
+      "responseMode": "FALLBACK"
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "b3a9244b-b236-493b-82ea-1365f5bc38fa"
+    }
+  ],
+  "proxyMode": true,
+  "proxyHost": "http://localhost:9001",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": [
+    {
+      "uuid": "1e769920-3df0-4c83-bc0d-713a5b754427",
+      "id": "ha7w",
+      "uri": "http://localhost:9000/notification",
+      "name": "Notify",
+      "documentation": "",
+      "method": "post",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "bodyType": "INLINE",
+      "body": "{\n  \"userId\": \"{{body 'userId'}}\",\n  \"orderId\": \"123\"\n}",
+      "databucketID": "",
+      "filePath": "",
+      "sendFileAsBody": true
+    }
+  ]
+}
